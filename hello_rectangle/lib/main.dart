@@ -1,38 +1,27 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+// You can read about packages here: https://flutter.io/using-packages/
 import 'package:flutter/material.dart';
 
+import 'category_route.dart';
+
+/// The function that is called when main.dart is run.
 void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Hello Rectangle',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Hello Rectangle'),
-        ),
-        body: const HelloRectangle(),
-      ),
-    ),
-  );
+  runApp(UnitConverterApp());
 }
 
-class HelloRectangle extends StatelessWidget {
-  const HelloRectangle({Key? key}) : super(key: key);
-
+/// This widget is the root of our application.
+///
+/// The first screen we see is a list [Categories].
+class UnitConverterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        color: Colors.greenAccent,
-        height: 400.0,
-        width: 300.0,
-        child: const Center(
-          child: Text(
-            'Hello!',
-            style: TextStyle(fontSize: 40.0),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Unit Converter',
+      home: CategoryRoute(),
     );
   }
 }
