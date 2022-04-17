@@ -1,13 +1,24 @@
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 
 import 'category.dart';
 
-final backgroundColor = Colors.green[100];
+final _backgroundColor = Colors.green[100];
 
+/// Category Route (screen).
+///
+/// This is the 'home' screen of the Unit Converter. It shows a header and
+/// a list of [Categories].
+///
+/// While it is named CategoryRoute, a more apt name would be CategoryScreen,
+/// because it is responsible for the UI at the route's destination.
 class CategoryRoute extends StatelessWidget {
-  const CategoryRoute();
+  const CategoryRoute({Key? key}) : super(key: key);
 
-  static const categoryNames = <String>[
+  static const _categoryNames = <String>[
     'Length',
     'Area',
     'Volume',
@@ -18,7 +29,7 @@ class CategoryRoute extends StatelessWidget {
     'Currency',
   ];
 
-  static const baseColors = <Color>[
+  static const _baseColors = <Color>[
     Colors.teal,
     Colors.orange,
     Colors.pinkAccent,
@@ -32,11 +43,9 @@ class CategoryRoute extends StatelessWidget {
   /// Makes the correct number of rows for the list view.
   ///
   /// For portrait, we construct a [ListView] from the list of category widgets.
-  Widget buildCategoryWidgets(List<Widget> categories) {
+  Widget _buildCategoryWidgets(List<Widget> categories) {
     return ListView.builder(
-      itemBuilder: (BuildContext context, int index) {
-        categories[index];
-      },
+      itemBuilder: (BuildContext context, int index) => categories[index],
       itemCount: categories.length,
     );
   }
@@ -45,23 +54,23 @@ class CategoryRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     final categories = <Category>[];
 
-    for (var i = 0; i < categoryNames.length; i++) {
+    for (var i = 0; i < _categoryNames.length; i++) {
       categories.add(Category(
-        categoryName: categoryNames[i],
-        categoryColor: baseColors[i],
-        categoryIcon: Icons.cake, key: null,
+        name: _categoryNames[i],
+        color: _baseColors[i] as ColorSwatch<dynamic>,
+        iconLocation: Icons.cake,
       ));
     }
 
     final listView = Container(
-      color: backgroundColor,
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
-      child: buildCategoryWidgets(categories),
+      color: _backgroundColor,
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: _buildCategoryWidgets(categories),
     );
 
     final appBar = AppBar(
       elevation: 0.0,
-      title: Text(
+      title: const Text(
         'Unit Converter',
         style: TextStyle(
           color: Colors.black,
@@ -69,7 +78,7 @@ class CategoryRoute extends StatelessWidget {
         ),
       ),
       centerTitle: true,
-      backgroundColor: backgroundColor,
+      backgroundColor: _backgroundColor,
     );
 
     return Scaffold(
